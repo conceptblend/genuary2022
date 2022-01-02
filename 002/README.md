@@ -18,3 +18,38 @@ My prompts:
 - high quality
 - black and white
 - chunky
+
+-----
+## Output
+
+#### Animation of the collective outputs
+![animation of the outputs](./doc/genuary-2022-002.gif)
+
+-----
+
+#### 00
+Sequential dither, scaled 4x, no noise
+![00](./doc/00--genuary-2022-002-G-bf359ce44644eb35d745ec6a1d66601d-2022-01-02T15_56_27.415Z.jpg)
+
+-----
+
+#### 01
+Bayer 4x4 dither, scaled 4x, noise added
+![01](./doc/01--genuary-2022-002-C-0db2188b48016ee99f7885c4f565c327-2022-01-02T15_50_34.454Z.jpg)
+
+-----
+
+#### 02
+Disperesed dither, scaled 2x, no noise
+![02](./doc/02--genuary-2022-002-A-1ad9e2f26174988e8c3c5de431ad7cf4-2022-01-02T15_50_56.464Z.jpg)
+
+-----
+
+#### 03
+Sequential, scaled 2x, noise added
+![03](./doc/03--genuary-2022-002-F-d4284e8efb1ba0f93ee1f1e1f39d5db4-2022-01-02T15_49_18.303Z.jpg)
+
+-----
+#### 04
+Bayer 4x4 dither, scaled 1x, noise added
+![04](./doc/04--genuary-2022-002-B-3fc0edde3fe319adcb17668b78b25c52-2022-01-02T15_50_46.554Z.jpg)
