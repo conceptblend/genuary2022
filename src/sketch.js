@@ -131,6 +131,9 @@ function draw() {
   }
 }
 
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 function getName() {
   // Encode the parameters into the filename
   // let params = window.btoa(JSON.stringify(P));
@@ -248,3 +251,6 @@ function downloadOutput() {
   saveImage();
   saveConfig();
 }
+
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
