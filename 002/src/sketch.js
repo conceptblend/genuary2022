@@ -44,10 +44,43 @@ const PARAMS = [
     scaleFactor: 1,
     ditherType: Ditherer.typeEnum.RANDOM,
   },
+  {
+    name: "genuary-2022-002-E",
+    seed: "ditherers be dithering",
+    width: 540*2,
+    height: 540*2,
+    fps: 1,
+    duration: 30, // no unit (frameCount by default; sometimes seconds or frames or whatever)
+    useNoise: !true,
+    scaleFactor: 2,
+    ditherType: Ditherer.typeEnum.RANDOM,
+  },
+  {
+    name: "genuary-2022-002-F",
+    seed: "ditherers be dithering",
+    width: 540*2,
+    height: 540*2,
+    fps: 1,
+    duration: 30, // no unit (frameCount by default; sometimes seconds or frames or whatever)
+    useNoise: true,
+    scaleFactor: 2,
+    ditherType: Ditherer.typeEnum.SEQUENTIAL,
+  },
+  {
+    name: "genuary-2022-002-G",
+    seed: "ditherers be dithering",
+    width: 540*2,
+    height: 540*2,
+    fps: 1,
+    duration: 30, // no unit (frameCount by default; sometimes seconds or frames or whatever)
+    useNoise: !true,
+    scaleFactor: 4,
+    ditherType: Ditherer.typeEnum.SEQUENTIAL,
+  },
 ];
 
 // PARAMETERS IN USE
-const P = PARAMS[ 2 ];
+const P = PARAMS[ 1 ];
 
 // VIDEO
 const EXPORTVIDEO = P.exportVideo ?? false; // set to `false` to not export
@@ -57,7 +90,12 @@ let cnvsrecorder;
 let isRecording = false;
 
 let ditherer = new Ditherer( P.ditherType, P.scaleFactor, P.useNoise );
+let img;
 
+function preload() {
+  // img = loadImage('imgs/NotreDame-1080.jpg');
+  img = loadImage('imgs/Rene-Magritte-The-Treachery-of-Images-This-is-Not-a-Pipe-1929--scaled-1080.jpg');
+}
 function setup() {
   createCanvas( P.width, P.height );
   pixelDensity( 1 );
@@ -77,14 +115,15 @@ function setup() {
 function draw() {
   background( 255 );
 
-  // DO YOUR DRAWING HERE!
-  noStroke();
-  const SIZE = P.width * 0.1;
-  for ( let i = 1024; i>0; i-- ) {
-    fill( Math.floor( Math.random() * 255 ) );
-    // rect( Math.random() * P.width, Math.random() * P.height, SIZE, SIZE );
-    circle( Math.random() * P.width, Math.random() * P.height, SIZE );
-  }
+  // noStroke();
+  // const SIZE = P.width * 0.1;
+  // for ( let i = 1024; i>0; i-- ) {
+  //   fill( Math.floor( Math.random() * 255 ) );
+  //   // rect( Math.random() * P.width, Math.random() * P.height, SIZE, SIZE );
+  //   circle( Math.random() * P.width, Math.random() * P.height, SIZE );
+  // }
+
+  image( img, 0, (P.height - img.height) * 0.5 );
 
   ditherer.dither();
 

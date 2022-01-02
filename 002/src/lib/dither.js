@@ -149,10 +149,16 @@ class Ditherer {
         // pixels[i + 1] = c * 0.8; /* G */
         // pixels[i + 2] = c * 0.1; /* B */
         // pixels[i + 3] = 255; /* A */
+        /* ==================== */
         pixels[i] = c; /* R */
         pixels[i + 1] = c; /* G */
         pixels[i + 2] = c; /* B */
         pixels[i + 3] = 255; /* A */
+        /* ==================== */
+        // pixels[i] = l; /* R */
+        // pixels[i + 1] = c; /* G */
+        // pixels[i + 2] = 0; /* B */
+        // pixels[i + 3] = 255; /* A */
 
         // ALTERNATE: Just adjust the transparency
         // pixels[i + 3] = c; /* A */

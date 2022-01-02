@@ -1,0 +1,11 @@
+{
+  "name": "genuary-2022-002-A",
+  "seed": "ditherers be dithering",
+  "width": 1080,
+  "height": 1080,
+  "fps": 1,
+  "duration": 30,
+  "useNoise": false,
+  "scaleFactor": 2,
+  "ditherType": 0
+}

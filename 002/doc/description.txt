@@ -1,0 +1,10 @@
+#genuary 002 • Dithering
+
+Custom dither modes at varying scales and precision:
+• Sequential
+• Dispersed
+• Bayer 4x4
+
+More info → https://genuary.art
+
+#genuary2022 #computationalart #proceduralart #generativeart #creativecoding #creativecodeart #p5js #processing #geometry #abstractart
