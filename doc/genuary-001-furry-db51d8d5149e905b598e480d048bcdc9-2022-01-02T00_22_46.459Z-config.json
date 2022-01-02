@@ -1,0 +1,17 @@
+{
+  "name": "genuary-001-furry",
+  "seed": "10,000 somethings",
+  "width": 1080,
+  "height": 1080,
+  "fps": 30,
+  "duration": 300,
+  "jitter": 32,
+  "diameter": 0.9,
+  "bezierPoints": 3,
+  "fg": 0,
+  "bg": 255,
+  "alpha": 10,
+  "strokeWeight": 1,
+  "exportVideo": false,
+  "method": 3
+}

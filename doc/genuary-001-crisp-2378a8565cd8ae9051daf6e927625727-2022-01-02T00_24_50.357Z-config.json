@@ -1,0 +1,13 @@
+{
+  "name": "genuary-001-crisp",
+  "seed": "hello world",
+  "width": 1080,
+  "height": 1080,
+  "jitter": 0,
+  "diameter": 0.9,
+  "bezierPoints": 3,
+  "fg": 0,
+  "bg": 255,
+  "alpha": 10,
+  "method": 2
+}

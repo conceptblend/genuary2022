@@ -1,9 +1,16 @@
-# p5sketch-template
+# Genuary 001
 
-p5.js sketch template that includes:
+https://genuary.art/
 
-- **p5.js** library for core features to edit the HTML canvas
-- **seedrandom** for deterministic randomization
-- **CanvasRecorder** for recording the canvas to webm format
-- **p5.js-svg** for drawing and exporting to SVG
+JAN.1 (credit: Michael Lowe)
 
+Draw 10,000 of something.
+
+[John Green drawing 170,000 circles](https://www.youtube.com/watch?v=ILMEVnVD8m8)
+
+
+My prompts:
+
+- Circle
+- Line -> Chords
+- Arc
