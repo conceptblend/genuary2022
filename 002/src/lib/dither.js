@@ -25,6 +25,7 @@ class Ditherer {
     JUMBLED: 0x03,
     BAYERISH: 0x04,
     BAYERISH2: 0x05,
+    MUNGED: 0x06,
     RANDOM: 0xFF,
   };
 
@@ -53,15 +54,16 @@ class Ditherer {
       13,  5, 15,  7,
        4, 12,  2, 10,
       16,  8, 14,  6],
+    munged: [
+      1, 4, 9,
+      6, 2, 5,
+      8, 7, 3,
+    ],
   };
 
   scale( n ) {
     return Math.floor( n / this.scaleFactor );
   }
-
-  //
-  //
-  //
 
   getIntensity16(x, y) {
     let _x = x % 4,
@@ -105,6 +107,10 @@ class Ditherer {
       case Ditherer.typeEnum.RANDOM:
         this.activeMatrix = null;
         this.getIntensity = null;
+        break;
+      case Ditherer.typeEnum.MUNGED:
+        this.activeMatrix = Ditherer.matrices.munged;
+        this.getIntensity = this.getIntensity9;
         break;
       case Ditherer.typeEnum.DISPERSED:
       default:
@@ -155,9 +161,9 @@ class Ditherer {
         pixels[i + 2] = c; /* B */
         pixels[i + 3] = 255; /* A */
         /* ==================== */
-        // pixels[i] = l; /* R */
-        // pixels[i + 1] = c; /* G */
-        // pixels[i + 2] = 0; /* B */
+        // pixels[i] = c * 0.94;//0.62; /* R */
+        // pixels[i + 1] = c * 0.12;//0.25; /* G */
+        // pixels[i + 2] = c * 0.91;//0.29; /* B */
         // pixels[i + 3] = 255; /* A */
 
         // ALTERNATE: Just adjust the transparency

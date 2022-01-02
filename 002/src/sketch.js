@@ -10,6 +10,7 @@ const PARAMS = [
     useNoise: !true,
     scaleFactor: 2,
     ditherType: Ditherer.typeEnum.DISPERSED,
+    src: 'imgs/Rene-Magritte-The-Treachery-of-Images-This-is-Not-a-Pipe-1929--scaled-1080.jpg',
   },
   {
     name: "genuary-2022-002-B",
@@ -21,6 +22,7 @@ const PARAMS = [
     useNoise: true,
     scaleFactor: 1,
     ditherType: Ditherer.typeEnum.BAYERISH2,
+    src: 'imgs/Rene-Magritte-The-Treachery-of-Images-This-is-Not-a-Pipe-1929--scaled-1080.jpg',
   },
   {
     name: "genuary-2022-002-C",
@@ -32,6 +34,7 @@ const PARAMS = [
     useNoise: true,
     scaleFactor: 4,
     ditherType: Ditherer.typeEnum.BAYERISH2,
+    src: 'imgs/Rene-Magritte-The-Treachery-of-Images-This-is-Not-a-Pipe-1929--scaled-1080.jpg',
   },
   {
     name: "genuary-2022-002-D",
@@ -43,6 +46,7 @@ const PARAMS = [
     useNoise: !true,
     scaleFactor: 1,
     ditherType: Ditherer.typeEnum.RANDOM,
+    src: 'imgs/Rene-Magritte-The-Treachery-of-Images-This-is-Not-a-Pipe-1929--scaled-1080.jpg',
   },
   {
     name: "genuary-2022-002-E",
@@ -54,6 +58,7 @@ const PARAMS = [
     useNoise: !true,
     scaleFactor: 2,
     ditherType: Ditherer.typeEnum.RANDOM,
+    src: 'imgs/Rene-Magritte-The-Treachery-of-Images-This-is-Not-a-Pipe-1929--scaled-1080.jpg',
   },
   {
     name: "genuary-2022-002-F",
@@ -65,6 +70,7 @@ const PARAMS = [
     useNoise: true,
     scaleFactor: 2,
     ditherType: Ditherer.typeEnum.SEQUENTIAL,
+    src: 'imgs/Rene-Magritte-The-Treachery-of-Images-This-is-Not-a-Pipe-1929--scaled-1080.jpg',
   },
   {
     name: "genuary-2022-002-G",
@@ -76,11 +82,26 @@ const PARAMS = [
     useNoise: !true,
     scaleFactor: 4,
     ditherType: Ditherer.typeEnum.SEQUENTIAL,
+    src: 'imgs/Rene-Magritte-The-Treachery-of-Images-This-is-Not-a-Pipe-1929--scaled-1080.jpg',
+  },
+  {
+    name: "genuary-2022-002-ALT",
+    seed: "ditherers be dithering",
+    width: 540*2,
+    height: 540*2,
+    fps: 10,
+    duration: 10 * 6, // frameCount (fps * seconds)
+    useNoise: !true,
+    scaleFactor: 4,
+    ditherType: Ditherer.typeEnum.BAYERISH2,
+    src: null,
+    exportVideo: !true,
+    // src: 'imgs/Rene-Magritte-The-Treachery-of-Images-This-is-Not-a-Pipe-1929--scaled-1080.jpg',
   },
 ];
 
 // PARAMETERS IN USE
-const P = PARAMS[ 1 ];
+const P = PARAMS[ PARAMS.length-1 ];
 
 // VIDEO
 const EXPORTVIDEO = P.exportVideo ?? false; // set to `false` to not export
@@ -93,9 +114,9 @@ let ditherer = new Ditherer( P.ditherType, P.scaleFactor, P.useNoise );
 let img;
 
 function preload() {
-  // img = loadImage('imgs/NotreDame-1080.jpg');
-  img = loadImage('imgs/Rene-Magritte-The-Treachery-of-Images-This-is-Not-a-Pipe-1929--scaled-1080.jpg');
+  if ( P.src ) img = loadImage( P.src );
 }
+
 function setup() {
   createCanvas( P.width, P.height );
   pixelDensity( 1 );
@@ -108,22 +129,18 @@ function setup() {
   
   frameRate( FPS );
 
-  noLoop();
+  if ( !!!P.exportVideo ) noLoop();
 }
 
 
 function draw() {
   background( 255 );
 
-  // noStroke();
-  // const SIZE = P.width * 0.1;
-  // for ( let i = 1024; i>0; i-- ) {
-  //   fill( Math.floor( Math.random() * 255 ) );
-  //   // rect( Math.random() * P.width, Math.random() * P.height, SIZE, SIZE );
-  //   circle( Math.random() * P.width, Math.random() * P.height, SIZE );
-  // }
-
-  image( img, 0, (P.height - img.height) * 0.5 );
+  if ( img ) {
+    image( img, 0, (P.height - img.height) * 0.5 );
+  } else {
+    flowField( P.width, P.height );
+  }
 
   ditherer.dither();
 
@@ -168,3 +185,26 @@ function downloadOutput() {
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+function flowField( w, h ) {
+  const cellSize = 4;
+  const rows = h / cellSize;
+  const cols = w / cellSize;
+  const inc = 0.01;
+  let xOff = 0,
+      yOff = 0,
+      zOff = 8 * frameCount * inc;
+
+  noStroke();
+  for (let y = 0; y < rows; y++) {
+    yOff = y * inc;
+    xOff = 0;
+    for (let x = 0; x < cols; x++ ) {
+      xOff += inc;
+      let c = noise( xOff, yOff, zOff );
+      fill( c * 255 );
+      rect( x * cellSize, y * cellSize, cellSize, cellSize )
+    }
+  }
+}
+
