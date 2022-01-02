@@ -15,4 +15,6 @@ Dithering.
 
 My prompts:
 
-- ?
+- high quality
+- black and white
+- chunky
