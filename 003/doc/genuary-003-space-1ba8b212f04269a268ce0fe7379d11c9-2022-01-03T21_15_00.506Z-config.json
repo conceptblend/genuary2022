@@ -1,0 +1,16 @@
+{
+  "name": "genuary-003-space",
+  "seed": "to infinity and beyond!",
+  "width": 1080,
+  "height": 1080,
+  "exportVideo": false,
+  "fps": 24,
+  "duration": 360,
+  "starfield": {
+    "velocity": 3,
+    "rotateByAmount": -42,
+    "density": 0.001,
+    "useBugFeature": true
+  },
+  "blendFrames": false
+}

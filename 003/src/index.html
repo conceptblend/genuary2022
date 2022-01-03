@@ -13,6 +13,7 @@
       referrerpolicy="no-referrer"
     ></script>
     <script src="https://cdn.jsdelivr.net/gh/conceptblend/p5js-recorder/dist/recorder.min.js"></script>
+    <script src="lib/starfield.js"></script>
     <script src="lib/md5.js"></script>
     <link rel="stylesheet" type="text/css" href="styles.css" />
     
@@ -20,5 +21,6 @@
   <body>
     <script src="sketch.js"></script>
     <button onclick="downloadOutput();">Download</button>
+    <button onclick="isLooping() ? noLoop() : loop();">Play/Pause</button>
   </body>
 </html>

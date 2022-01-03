@@ -1,0 +1,16 @@
+{
+  "name": "genuary-003-space",
+  "seed": "so long and thanks for all the fish",
+  "width": 1080,
+  "height": 1080,
+  "exportVideo": false,
+  "fps": 24,
+  "duration": 360,
+  "starfield": {
+    "velocity": 3,
+    "rotateByAmount": -42,
+    "density": 0.006,
+    "useBugFeature": true
+  },
+  "blendFrames": false
+}

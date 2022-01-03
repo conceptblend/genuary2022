@@ -1,19 +1,73 @@
 // PARAMETER SETS
 const PARAMS = [
   {
-    name: "set one",
-    seed: "hello world",
-    width: 540,
-    height: 540,
-    fps: 30,
-    duration: 30 * 10, // no unit (frameCount by default; sometimes seconds or frames or whatever)
-    a: 0,
-    b: 0,
+    name: "genuary-003-space",
+    seed: "to infinity and beyond!",
+    width: 540*2,
+    height: 540*2,
+    exportVideo: !true,
+    fps: 24,
+    duration: 24 * 15, // no unit (frameCount by default; sometimes seconds or frames or whatever)
+    starfield: {
+      velocity: 3,
+      rotateByAmount: -42,
+      density: 0.001,
+      useBugFeature: true,
+    },
+    blendFrames: false,
+  },
+  {
+    name: "genuary-003-space",
+    seed: "life the universe and everything",
+    width: 540*2,
+    height: 540*2,
+    exportVideo: !true,
+    fps: 24,
+    duration: 24 * 15, // no unit (frameCount by default; sometimes seconds or frames or whatever)
+    starfield: {
+      velocity: 3,
+      rotateByAmount: -42,
+      density: 0.002,
+      useBugFeature: true,
+    },
+    blendFrames: false,
+  },
+  {
+    name: "genuary-003-space",
+    seed: "so long and thanks for all the fish",
+    width: 540*2,
+    height: 540*2,
+    exportVideo: !true,
+    fps: 24,
+    duration: 24 * 15, // no unit (frameCount by default; sometimes seconds or frames or whatever)
+    starfield: {
+      velocity: 3,
+      rotateByAmount: -42,
+      density: 0.006,
+      useBugFeature: true,
+    },
+    blendFrames: false,
+  },
+  {
+    name: "genuary-003-space",
+    seed: "the meaning of life",
+    width: 540*2,
+    height: 540*2,
+    exportVideo: !true,
+    fps: 24,
+    duration: 24 * 15, // no unit (frameCount by default; sometimes seconds or frames or whatever)
+    starfield: {
+      velocity: 4,
+      rotateByAmount: -42,
+      density: 0.002,
+      useBugFeature: true,
+    },
+    blendFrames: false,
   },
 ];
 
 // PARAMETERS IN USE
-const P = PARAMS[0];
+const P = PARAMS[ PARAMS.length - 4 ];
 
 // VIDEO
 const EXPORTVIDEO = P.exportVideo ?? false; // set to `false` to not export
@@ -22,8 +76,11 @@ const DURATION = P.duration;
 let cnvsrecorder;
 let isRecording = false;
 
+// General
+let starfield = new StarField( P.width, P.height, P.starfield );
+
 function setup() {
-  createCanvas( P.width, P.height );
+  let cnvs = createCanvas( P.width, P.height );
   angleMode( DEGREES );
   colorMode( RGB, 255 );
   
@@ -33,19 +90,41 @@ function setup() {
   
   frameRate( FPS );
 
-  // noLoop();
+  starfield.generateStarField();
+  background( 0 );
+  fill( 192 );
+  noStroke();
+
+  cnvs.mouseClicked( reactToClick );
+
+  if ( !!!P.exportVideo ) noLoop();
 }
 
+let mx = 0, my = 0; // for mouse control of velocity and rotation
+
+function reactToClick() {
+  mx = mouseX,
+  my = mouseY;
+
+  // X-axis controls the velocity
+  // Y-axis controls the rotation factor
+
+  starfield.velocity = clamp( mx / P.width, 0, 1 ) * 24;
+  starfield.rotateByAmount = ( clamp( my / P.height, 0, 1 ) - 0.5 ) * 360;
+
+  console.log(`//\nvel: ${starfield.velocity}\nrot: ${starfield.rotateByAmount}\n//`);
+}
 
 function draw() {
-  background(0);
+  if( P.blendFrames ) {
+    background( 0, 0, 0, 20 );
+  }
 
-  // DO YOUR DRAWING HERE!
-  noFill();
-  stroke( 255, 128, 32 );
-  rect( 20, 20, 30, 30 );
+  // flowField( P.width, P.height );
+  starfield.update();
+  starfield.draw();
 
-  if (EXPORTVIDEO) {
+  if ( EXPORTVIDEO ) {
     if (!isRecording) {
       cnvsrecorder = new CanvasRecorder(FPS);
       cnvsrecorder.start();
@@ -86,3 +165,39 @@ function downloadOutput() {
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+function clamp( val, min, max ) {
+  return Math.max(
+    Math.min(
+      val,
+      max
+    ),
+    min
+  );
+}
+
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+function flowField( w, h ) {
+  const cellSize = 4;
+  const rows = h / cellSize;
+  const cols = w / cellSize;
+  const inc = 0.01;
+  let xOff = 0,
+      yOff = 0,
+      zOff = 8 * frameCount * inc;
+
+  noStroke();
+  for (let y = 0; y < rows; y++) {
+    yOff = y * inc;
+    xOff = 0;
+    for (let x = 0; x < cols; x++ ) {
+      xOff += inc;
+      let c = noise( xOff, yOff, zOff );
+      fill( c * 255 );
+      rect( x * cellSize, y * cellSize, cellSize, cellSize )
+    }
+  }
+}
