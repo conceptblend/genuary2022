@@ -97,7 +97,7 @@ function setup() {
 
   cnvs.mouseClicked( reactToClick );
 
-  if ( !!!P.exportVideo ) noLoop();
+  if ( !EXPORTVIDEO ) noLoop();
 }
 
 let mx = 0, my = 0; // for mouse control of velocity and rotation
