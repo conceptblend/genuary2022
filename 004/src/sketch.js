@@ -12,13 +12,36 @@ const PARAMS = [
     duration: 4 * 10, // no unit (frameCount by default; sometimes seconds or frames or whatever)
     numSegmentsPerLine: 16,
     lineSegmentLength: 16,
-    gridSize: 24,
-    b: 0,
+    segmentDensity: 0.71,
+    gridSize: 16,
+    paletteStart: 162,//255,//162,
+    paletteSize: 64,
+    paletteRange: 120,
+    strokeMax: 24,
+  },
+  {
+    name: "notfidenza",
+    seed: "this is not a fidenza",
+    width: 540,
+    height: 540,
+    exportVideo: !true,
+    exportImages: !true,
+    animated: !true,
+    fps: 4,
+    duration: 4 * 10, // no unit (frameCount by default; sometimes seconds or frames or whatever)
+    numSegmentsPerLine: 16,
+    lineSegmentLength: 24,
+    segmentDensity: 0.8,
+    gridSize: 12,
+    paletteStart: 162,//255,//162,
+    paletteSize: 64,
+    paletteRange: 120,
+    strokeMax: 12,
   },
 ];
 
 // PARAMETERS IN USE
-const P = PARAMS[0];
+const P = PARAMS[ PARAMS.length - 1 ];
 
 // VIDEO
 const EXPORTVIDEO = P.exportVideo ?? false; // set to `false` to not export
@@ -54,16 +77,35 @@ function drawPath1( points ) {
   points.forEach( p => vertex( p.x, p.y ) );
   endShape();
 }
+//
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+//
 function drawPath( points ) {
   // stroke( Math.floor( Math.random() * 255 ) );
   stroke( cFills[ Math.floor( Math.random() * cFills.length ) ]);
   noFill();
 
   for( let n = 1, len = points.length; n < len; n++ ) {
-    strokeWeight( Math.floor( Math.random() * 8 ) );
-    line( points[ n-1 ].x, points[ n-1 ].y, points[ n ].x, points[ n ].y );
+
+    if ( Math.random() < P.segmentDensity ) {
+      let s = Math.floor( 1 + Math.random() * P.strokeMax );
+      push();
+      stroke( 0, 80, 30 );
+      strokeWeight( s+2 );
+      line( points[ n-1 ].x, points[ n-1 ].y, points[ n ].x, points[ n ].y );
+      pop();
+      
+      // stroke( cFills[ Math.floor( Math.random() * cFills.length ) ]);
+      strokeWeight( s );
+      line( points[ n-1 ].x, points[ n-1 ].y, points[ n ].x, points[ n ].y );
+    }
+
   }
 }
+//
+// %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+//
+
 
 let paths = [];
 
@@ -74,6 +116,7 @@ function setup() {
   colorMode( HSB, 360, 100, 100, 1 );
 
   strokeCap( ROUND );
+  // strokeCap( PROJECT );
   // stroke( cStroke );
   // strokeWeight( 2 );
   
@@ -83,11 +126,11 @@ function setup() {
 
   cStroke = color( cStrokeBase.hue, cStrokeBase.saturation, cStrokeBase.brightness );
   
-  let n = 16;
-  let start = Math.floor( Math.random() * 360 );
+  let n = P.paletteSize ?? 16;
+  let start = P.paletteStart ?? Math.floor( Math.random() * 360 );
   while ( n-- > 0 ) {
     cFills.push(
-      color( newHue( start, 90 ), cFillBase.saturation, cFillBase.brightness )
+      color( newHue( start, P.paletteRange ), cFillBase.saturation, cFillBase.brightness )
     );
   }
 
@@ -116,7 +159,8 @@ function buildAPath( sx, sy, steps ) {
 
 
 function draw() {
-  background( 0 );
+  // background( 0 );
+  background( 0, 80, 10 );
 
   paths = [];
 
