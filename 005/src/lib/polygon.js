@@ -30,7 +30,7 @@ class Polygon {
     endShape( CLOSE );
   }
 
-  subdivide( ratio = 0.5 ) {
+  subdivide( ratio = 0.5, omissionRate = 0.3 ) {
     // Make a copy to mess with
     let pts = [ ...this.points ];
 
@@ -64,7 +64,7 @@ class Polygon {
         pts[ mid2 ],
       ], false );
 
-    return Math.random() > 0.7 ? [ polygon1 ] : [ polygon1 , polygon2 ];
+    return Math.random() < omissionRate ? [ polygon1 ] : [ polygon1 , polygon2 ];
   }
 }
 const JITTER_HALF = 8;

@@ -8,10 +8,11 @@ const PARAMS = [
     fps: 1,
     duration: 8 * 2, // no unit (frameCount by default; sometimes seconds or frames or whatever)
     exportVideo: !true,
-    exportFrames: true,
+    exportFrames: !true,
     isAnimated: true,
     strokeWeight: 2*2,
     fillModulus: 7,
+    omissionRate: 0.3,
   },
 ];
 
@@ -64,7 +65,7 @@ function draw() {
   for (let n = iterations; n > 0; n-- ) {
     polysOut = [];
     polysIn.forEach( ( pp, n ) => {
-      polysOut = polysOut.concat( pp.subdivide( clamp( Math.random(), 0.2, 0.8 ) ) );
+      polysOut = polysOut.concat( pp.subdivide( clamp( Math.random(), 0.2, 0.8 ), P.omissionRate ) );
     });
     polysIn = polysOut;
   }
