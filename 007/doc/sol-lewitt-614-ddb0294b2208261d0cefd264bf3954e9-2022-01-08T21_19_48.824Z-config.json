@@ -1,0 +1,12 @@
+{
+  "name": "sol-lewitt-614",
+  "seed": "let's try somthing new",
+  "width": 540,
+  "height": 540,
+  "fps": 2,
+  "duration": 16,
+  "exportVideo": false,
+  "isAnimated": true,
+  "minDist": 20,
+  "maxAttempts": 4
+}

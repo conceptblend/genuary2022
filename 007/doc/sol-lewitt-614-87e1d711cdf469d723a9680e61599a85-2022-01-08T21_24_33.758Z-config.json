@@ -1,0 +1,12 @@
+{
+  "name": "sol-lewitt-614",
+  "seed": "ok sol lfg!",
+  "width": 1080,
+  "height": 1080,
+  "fps": 2,
+  "duration": 30,
+  "exportVideo": true,
+  "isAnimated": true,
+  "minDist": 40,
+  "maxAttempts": 4
+}
