@@ -45,6 +45,24 @@ const PARAMS = [
     aniCurveHandles: [[ 0, .95 ],[ .92, .69 ]],
     // aniCurveHandles: [[ 1, 0 ],[ 0, 0 ]],
   },
+  {
+    name: "dot-dither-curve",
+    seed: "hello world",
+    width: 540*MULT,
+    height: 540*MULT,
+    fps: 16,
+    duration: 721, // no unit (frameCount by default; sometimes seconds or frames or whatever)
+    exportVideo: !true,
+    isAnimated: true,
+    blockSize: 54*MULT,
+    sinMultiplier: 3,
+    aniCurveHandles: [[ 0, .95 ],[ .92, .69 ]],
+    // aniCurveHandles: [[ 1, 0 ],[ 0, 0 ]],
+    useDither: true,
+    ditherType: Ditherer.typeEnum.BAYERISH2,
+    ditherScale: 4,
+    ditherNoise: true,
+  },
 ];
 
 // PARAMETERS IN USE
@@ -68,10 +86,31 @@ const aniCurve = [
 const MIN_W = P.width * 0.1;
 const MAX_W = P.width * 0.9;
 
+let ditherer = new Ditherer( P.ditherType, P.ditherScale, P.ditherNoise );
+
+let buffer;
+/**
+ * BUFFER
+ * 
+ * The 'buffered' version is a fair bit slower (didn't measure exactly 
+ * how much slower) but it allows for easy toggling between a dithered
+ * version and a none-dithered version.
+ * 
+ * Future optimization?
+ */
+
 function setup() {
   createCanvas( P.width, P.height );
+  pixelDensity( 1 );
   angleMode( DEGREES );
   colorMode( RGB, 255 );
+
+  buffer = createGraphics( P.width, P.height );
+  buffer.pixelDensity( 1 );
+  buffer.colorMode( RGB, 255 );
+  buffer.noStroke();
+  buffer.fill( 255 );
+  buffer.background( 0 );
   
   noStroke();
   fill( 255 );
@@ -89,7 +128,7 @@ function mapToScale( val, aLow, aHigh, bLow, bHigh ) {
 }
 
 function draw() {
-  background( 0, 0, 0, 20 );
+  buffer.background( 0, 0, 0, 50 );
   // background( 255, 255, 255, 20 );
 
   let x = 0,
@@ -112,10 +151,13 @@ function draw() {
 
     let d = mapToScale( aniTiming.y, 0, 1, P.blockSize*.25, P.blockSize );
     // rect( x, y, d, d ); // DYNAMIC SIZE
-    circle( x+P.blockSize*0.5, y+P.blockSize*0.5, d, d ); // DYNAMIC SIZE
+    buffer.circle( x+P.blockSize*0.5, y+P.blockSize*0.5, d ); // DYNAMIC SIZE
     // rect( x, y, P.blockSize, P.blockSize ); // STATIC SIZE
   }
 
+  image( buffer, 0, 0 );
+
+  if ( P.useDither ) ditherer.dither();
 
   if (EXPORTVIDEO) {
     if (!isRecording) {
