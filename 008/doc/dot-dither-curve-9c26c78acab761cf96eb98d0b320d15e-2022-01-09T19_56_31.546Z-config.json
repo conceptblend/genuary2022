@@ -1,0 +1,26 @@
+{
+  "name": "dot-dither-curve",
+  "seed": "hello world",
+  "width": 1080,
+  "height": 1080,
+  "fps": 16,
+  "duration": 721,
+  "exportVideo": false,
+  "isAnimated": true,
+  "blockSize": 108,
+  "sinMultiplier": 3,
+  "aniCurveHandles": [
+    [
+      0,
+      0.95
+    ],
+    [
+      0.92,
+      0.69
+    ]
+  ],
+  "useDither": true,
+  "ditherType": 5,
+  "ditherScale": 4,
+  "ditherNoise": true
+}
