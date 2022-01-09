@@ -1,0 +1,22 @@
+{
+  "name": "box-topples",
+  "seed": "hello world",
+  "width": 1080,
+  "height": 1080,
+  "fps": 16,
+  "duration": 721,
+  "exportVideo": false,
+  "isAnimated": true,
+  "blockSize": 54,
+  "sinMultiplier": 3,
+  "aniCurveHandles": [
+    [
+      0,
+      0.95
+    ],
+    [
+      0.92,
+      0.69
+    ]
+  ]
+}

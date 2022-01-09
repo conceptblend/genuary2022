@@ -1,0 +1,9 @@
+#genuary 008 • Single curve only.
+
+I chose to apply my "single curve" to a custom bezier curve function that animates and scales the elements of the drawing. I like it but I don't loooove it. Still a fun exercise though 😁
+
+•• cubic-bezier( 0, .95 , .92, .69 ) ••
+
+More info → https://genuary.art
+
+#genuary2022 #computationalart #proceduralart #generativeart #creativecoding #creativecodeart #p5js #processing #geometry #abstractart #blackandwhite
