@@ -1,3 +1,5 @@
+const RENDERASSVG = true;
+
 // PARAMETER SETS
 const PARAMS = [
   {
@@ -73,7 +75,8 @@ let cnvsrecorder;
 let isRecording = false;
 
 function setup() {
-  createCanvas(P.width, P.height);
+  // SVG output is MUCH SLOWER but necessary for the SVG exports
+  createCanvas( P.width, P.height, RENDERASSVG ? SVG : P2D );
   angleMode(DEGREES);
   colorMode(RGB, 255);
 
@@ -219,7 +222,8 @@ function draw() {
     line(l.item.p1.x, l.item.p1.y, l.item.p2.x, l.item.p2.y)
   );
 
-  if (EXPORTVIDEO) {
+  if ( EXPORTVIDEO ) {
+    if ( RENDERASSVG ) throw new Error("Cannot export video when rendering as Vector");
     if (!isRecording) {
       cnvsrecorder = new CanvasRecorder(FPS);
       cnvsrecorder.start();
@@ -230,7 +234,7 @@ function draw() {
   // Example to end automatically after 361 frames to get a full loop
   if ((EXPORTVIDEO || P.isAnimated) && frameCount > DURATION) {
     EXPORTVIDEO && cnvsrecorder.stop(`${getName()}`);
-    saveConfig();
+    EXPORTVIDEO && saveConfig();
     noLoop();
     console.log('Done.');
   }
@@ -246,18 +250,19 @@ function getName() {
   return `${P.name}-${params}-${new Date().toISOString()}`;
 }
 
-function saveImage(ext) {
-  save(`${getName()}.${ext ?? 'jpg'}`);
+function saveImage( ext = 'jpg' ) {
+  save(`${ getName() }.${ ext }`);
 }
 
 function saveConfig() {
-  saveJSON(P, `${getName()}-config.json`);
+  saveJSON( P, `${getName()}-config.json` );
 }
 
 function downloadOutput() {
-  saveImage();
+  saveImage( RENDERASSVG ? 'svg' : 'jpg' );
   saveConfig();
 }
+
 
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
