@@ -51,7 +51,7 @@ const PARAMS = [
   },
   {
     name: "pakt-revised-attempts-filled",
-    seed: "pakt circlez",
+    seed: "pakt circlez pt. 3",
     width: 540*2,
     height: 540*2,
     fps: 30,
@@ -62,10 +62,11 @@ const PARAMS = [
     maxAttempts: Math.pow(2, 6), /* 2^4,5,6,7 */
     minSteps: 4,
     minRadius:  1080,//12,
-    targetPerFrame: 16, 
+    targetPerFrame: 32, 
     borderSize: 32*2,
-    noStroke: true,
-    colorSteps: 4,
+    noStroke: !true,
+    stroke: 255,
+    colorSteps: false,
     useDither: false,
     ditherType: Ditherer.typeEnum.SEQUENTIAL,
     ditherScale: 4,
@@ -116,16 +117,23 @@ function setup() {
   
   // Simplified drawing optimization ignores 
   // circle-specific color properties.
-  stroke( 0 );
+  stroke( P.stroke ?? 255 );
   strokeWeight( 1 );
   P.noStroke && noStroke();
   noFill();
-  let seedCircle = new Circle( P.width * 0.5, P.height * 0.5 );
+
+  Math.seedrandom( P.seed );
+
+  let innerBoundsX = P.width - 2 * P.borderSize,
+      innerBoundsY = P.height - 2 * P.borderSize;
+  let x = P.borderSize + Math.random() * innerBoundsX,
+      y = P.borderSize + Math.random() * innerBoundsY;
+
+  // let seedCircle = new Circle( P.width * 0.5, P.height * 0.5 );
+  let seedCircle = new Circle( x, y, 255 );
   seedCircle.radius = Math.min( P.width, P.height ) * 0.2;
   seedCircle.isGrowing = false;
   circles.push( seedCircle );
-  
-  Math.seedrandom( P.seed );
   
   frameRate( FPS );
 

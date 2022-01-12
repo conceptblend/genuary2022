@@ -3,7 +3,7 @@ class Circle {
   constructor(x_, y_, c_) {
     this.x = Math.round( x_ );
     this.y = Math.round( y_ );
-    // this.color = c_ || color( 255 );
+    this.color = c_ || null;
     this.radius = 1;
     this.isGrowing = true;
   }
@@ -21,10 +21,15 @@ class Circle {
         circle( this.x, this.y, r*2 );
       }
     } else {
-      if ( colorSteps ) {
+      if ( this.color !== null ) {
+        fill( this.color );
+      } else if ( colorSteps ) {
         let l = noise( this.x * 0.01, this.y * 0.01 );
-        l = Math.floor( l * colorSteps ) / colorSteps;
+        l = Math.ceil( l * colorSteps ) / colorSteps;
         fill( l * 255 );
+      } else {
+        let l = noise( this.x * 0.01, this.y * 0.01 );
+        fill( l > 0.5 ? 255 : 0 );
       }
       circle( this.x, this.y, this.radius*2 );
     }
