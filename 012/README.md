@@ -1,34 +1,26 @@
-# p5sketch-template
+# Genuary 2022
 
-p5.js sketch template that includes:
+JAN.12 (credit: Richard Vigniel) Packing (squares, circles, any shape…)
 
-- **p5.js** library for core features to edit the HTML canvas
-- **seedrandom** for deterministic randomization
-- **CanvasRecorder** for recording the canvas to webm format
-- **p5.js-svg** for drawing and exporting to SVG
+My prompts:
+
+- hole
+- negative space
+- black and white
 
 -----
 
-### FIX OPEN BUG IN A DEPENDENCY:
+### A subset the outputs
+#### 00
+![00](./doc/00--pakt-revised-attempts-filled-e73a57c6f3a95c1a181c138687b24fed-2022-01-12T15_37_02.683Z.jpg)
+#### 01
+![01](./doc/01--pakt-revised-attempts-filled-51c0676ab1028da40b379e09ef94ffe6-2022-01-12T14_38_47.041Z.jpg)
 
+#### 02
+![02](./doc/02--pakt-revised-attempts-filled-57d9020a31e0be99eb34a80a96a728d7-2022-01-12T15_38_46.442Z.jpg)
 
-[https://github.com/tapio/live-server/pull/386](https://github.com/tapio/live-server/pull/386)
+#### 99
 
-```zsh
-cd node_modules/live-server/
+Showing all the circles "under the hood" that make up '02'.
 
-yarn remove colors && yarn add colors@1.4.0
-
-# EDIT PACKAGE.JSON DEPENDENCIES
-#
-# "dependencies": {
-#   "chokidar": "^2.0.4",
-#   "colors": "latest", <= change from "latest" to "1.4.0" (stable)
-#   "connect": "^3.6.6",
-
-cd ../../
-
-yarn install && yarn start
-
-# END FIX
-```
+![99](./doc/99--pakt-revised-attempts-filled-c1825970106dc30c705a185d5df2f7c8-2022-01-12T15_44_42.851Z.jpg)

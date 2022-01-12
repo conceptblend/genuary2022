@@ -1,0 +1,23 @@
+{
+  "name": "pakt-revised-attempts-filled",
+  "seed": "pakt circlez pt. 3",
+  "width": 1080,
+  "height": 1080,
+  "fps": 30,
+  "duration": 300,
+  "exportVideo": false,
+  "isAnimated": true,
+  "renderAsVector": false,
+  "maxAttempts": 64,
+  "minSteps": 4,
+  "minRadius": 1080,
+  "targetPerFrame": 32,
+  "borderSize": 64,
+  "noStroke": false,
+  "stroke": 255,
+  "colorSteps": false,
+  "useDither": false,
+  "ditherType": 2,
+  "ditherScale": 4,
+  "ditherNoise": false
+}

@@ -1,0 +1,11 @@
+#genuary 012 • Packing circles into squares.
+
+Additional prompt: Negative space
+
+I kind of like how this turned out. Initially, I thought I might add motion to it but in the end I decided against it. This will also be interesting to revisit post-genuary without the self-imposed constraint of black and white!
+
+(The 4th image shows all of the underlying circles that made up the 3rd output.)
+
+More info → https://genuary.art
+
+#genuary2022 #computationalart #proceduralart #generativeart #creativecoding #creativecodeart #p5js #processing #geometry #abstractart #blackandwhite
