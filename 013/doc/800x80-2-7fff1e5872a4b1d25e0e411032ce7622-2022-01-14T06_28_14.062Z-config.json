@@ -1,0 +1,44 @@
+{
+  "name": "800x80-2",
+  "seed": "wooohoooo",
+  "width": 800,
+  "height": 80,
+  "fps": 10,
+  "duration": 360,
+  "exportVideo": true,
+  "isAnimated": true,
+  "renderAsVector": false,
+  "steps": 30,
+  "noiseIncrement": 0.045,
+  "levels": 16,
+  "blockSize": 10,
+  "pixels": 1,
+  "useFullSquareCanvas": true,
+  "palette": [
+    [
+      255,
+      255,
+      255
+    ],
+    [
+      0,
+      0,
+      0
+    ],
+    [
+      240,
+      107,
+      55
+    ],
+    [
+      0,
+      0,
+      0
+    ],
+    [
+      73,
+      96,
+      130
+    ]
+  ]
+}
