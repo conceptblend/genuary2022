@@ -1,0 +1,24 @@
+{
+  "name": "gradients-gone-wrong",
+  "seed": "a freaking explosion of colour",
+  "gridSize": 4,
+  "blockSize": 270,
+  "width": 1080,
+  "height": 1080,
+  "fps": 30,
+  "duration": 300,
+  "exportVideo": false,
+  "isAnimated": false,
+  "renderAsVector": false,
+  "aniCurveHandles": [
+    [
+      0,
+      0.95
+    ],
+    [
+      0.92,
+      0.69
+    ]
+  ],
+  "useGrayscale": false
+}
