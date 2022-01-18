@@ -1,0 +1,22 @@
+{
+  "name": "truchet-colours",
+  "seed": "but like for realz",
+  "width": 1080,
+  "height": 1080,
+  "fps": 8,
+  "duration": 32,
+  "exportVideo": false,
+  "exportFrames": true,
+  "isAnimated": true,
+  "renderAsVector": false,
+  "settings": {
+    "gridSize": 20,
+    "strokeWeight": 8,
+    "style": 2
+  },
+  "colours": [
+    "#832161",
+    "#eee82c",
+    "#da4167"
+  ]
+}
