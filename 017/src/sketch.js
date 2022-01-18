@@ -85,7 +85,7 @@ const PARAMS = [
     fps: 8,
     duration: 8 * 4, // no unit (frameCount by default; sometimes seconds or frames or whatever)
     exportVideo: false,
-    exportFrames: true,
+    exportFrames: !true,
     isAnimated: true,
     renderAsVector: !true,
     settings: {
