@@ -1,0 +1,11 @@
+{
+  "name": "set one",
+  "seed": "hello world",
+  "width": 540,
+  "height": 540,
+  "fps": 30,
+  "duration": 300,
+  "exportVideo": false,
+  "isAnimated": false,
+  "renderAsVector": false
+}

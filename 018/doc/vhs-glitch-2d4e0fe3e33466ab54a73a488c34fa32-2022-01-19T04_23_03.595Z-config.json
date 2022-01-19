@@ -1,0 +1,11 @@
+{
+  "name": "vhs-glitch",
+  "seed": "beta was better",
+  "width": 540,
+  "height": 540,
+  "fps": 15,
+  "duration": 36,
+  "exportVideo": true,
+  "isAnimated": true,
+  "renderAsVector": false
+}
