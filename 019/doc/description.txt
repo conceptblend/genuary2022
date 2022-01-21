@@ -1,0 +1,9 @@
+#genuary 019 • Use text/typography.
+
+I used this prompt as an opportunity to try out the rad live-coding playground that @andreasgysin built.
+
+My starting point was one of the examples so I don't get much (any?) credit for creativity here -- I just needed an excuse to test out the playground!!!! Forgive me. Then go try it for yourself!
+
+→ https://play.ertdfgcvb.xyz/
+
+#genuary2022 #computationalart #proceduralart #generativeart #creativecoding #creativecodeart #p5js #processing #textart #asciiart #text #ascii #ansi #shader
