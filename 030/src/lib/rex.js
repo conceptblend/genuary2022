@@ -7,6 +7,12 @@ class Rex {
     SW: 0x08,
   };
 
+  /**
+   * 
+   * @param {p5.Vector} p0 
+   * @param {p5.Vector} p1 
+   * @param {Number} [ratio] The linear interpolation ratio. (0 ≤ ratio ≤ 1) 
+   */
   constructor( p0 /*p5.Vector::2D*/, p1, ratio = 2 ) {
     this._isBuilt = false;
 
@@ -23,6 +29,10 @@ class Rex {
     this.build( ratio );
   }
 
+  /**
+   * 
+   * @param {Number} [ratio] The linear interpolation ratio. (0 ≤ ratio ≤ 1)
+   */
   build( ratio ) {
     this.ratio = ratio ? ratio : this.ratio;
 
@@ -38,6 +48,14 @@ class Rex {
     this.children = [];
   }
 
+  /**
+   * 
+   * @param {Number} [r1] The linear interpolation ratio for the 'left' edge. (0 ≤ ratio ≤ 1) 
+   * @param {Number} [r2] The linear interpolation ratio for the 'right' edge. (0 ≤ ratio ≤ 1) 
+   * @param {Rex.SLICE_ENUM} placement See Rex.SLICE_ENUM
+   * @param {Number} depth Recursive depth at this level. Continues until 0.
+   * @returns 
+   */
   addChildren( r1, r2, placement, depth ) {
     if ( depth <= 0 ) return false;
 
@@ -67,7 +85,11 @@ class Rex {
     return true;
   }
 
-  draw( bStroke ) {
+  /**
+   * 
+   * @param {Boolean} [bStroke] Draw the stroke.
+   */
+  draw( bStroke = false ) {
     fill( this.colour );
     bStroke && push();
     bStroke && stroke( 0 );

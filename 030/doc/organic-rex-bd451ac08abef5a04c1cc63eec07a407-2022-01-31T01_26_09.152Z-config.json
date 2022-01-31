@@ -1,0 +1,30 @@
+{
+  "name": "organic-rex",
+  "seed": "hello world",
+  "width": 1080,
+  "height": 1080,
+  "fps": 30,
+  "duration": 300,
+  "exportVideo": false,
+  "isAnimated": false,
+  "renderAsVector": false,
+  "r1": 0.83,
+  "r2": 0.4918277863398975,
+  "widthToHeightRatio": 0.76,
+  "iterations": 32,
+  "colours": [
+    "#023962",
+    "#035a81",
+    "#0baec9",
+    "#99fbfd"
+  ],
+  "alpha": 255,
+  "backgroundColour": "#000000",
+  "drawStroke": true,
+  "originXFactor": 0.1,
+  "originYFactor": 0.75,
+  "originScaleFactor": 0.3,
+  "layerCount": 2,
+  "isolateBranches": true,
+  "placements": 3
+}

@@ -1,87 +1,7 @@
 // PARAMETER SETS
 const PARAMS = [
   {
-    name: "organic-rex",
-    seed: "hello world",
-    width: 540,
-    height: 540,
-    fps: 30,
-    duration: 30 * 10, // no unit (frameCount by default; sometimes seconds or frames or whatever)
-    exportVideo: false,
-    isAnimated: !false,
-    renderAsVector: !true,
-    r1: 0.835,
-    r2: 0.45,
-    widthToHeightRatio: 0.705,
-    iterations: 16,
-    colours: [
-      // "#B21F52", // Maroon flush
-      "#E96BAA", // Deep blush
-      "#9AB146", // Sushi
-      "#CDC646", // Tumeric
-      "#53BC4E", // Apple
-    ],
-    alpha: 16,
-    backgroundColour: "#000000",
-  },
-  {
-    name: "organic-rex",
-    seed: "hello world",
-    width: 540,
-    height: 540,
-    fps: 30,
-    duration: 30 * 10, // no unit (frameCount by default; sometimes seconds or frames or whatever)
-    exportVideo: false,
-    isAnimated: !false,
-    renderAsVector: !true,
-    r1: 0.835,
-    r2: 0.45,
-    widthToHeightRatio: 0.705,
-    iterations: 16,
-    colours: [
-      "#00152c", // Midnight
-      "#023962", // Astronaut
-      "#035a81", // Venice
-      "#0baec9", // Cerulean
-      "#99fbfd", // Anikawa
-      // "#ccffff", // Onahau
-    ],
-    alpha: 64,
-    backgroundColour: "#000000",
-    originXFactor: 0.2,
-    originYFactor: 0.8,
-    originScaleFactor: 0.3,
-  },
-  {
-    name: "organic-rex",
-    seed: "hello world",
-    width: 540,
-    height: 540,
-    fps: 30,
-    duration: 30 * 10, // no unit (frameCount by default; sometimes seconds or frames or whatever)
-    exportVideo: false,
-    isAnimated: true,
-    renderAsVector: !true,
-    r1: 0.83,
-    r2: 0.45,
-    widthToHeightRatio: 0.76,
-    iterations: 32,
-    colours: [
-      "#00152c", // Midnight
-      "#023962", // Astronaut
-      "#035a81", // Venice
-      "#0baec9", // Cerulean
-      "#99fbfd", // Anikawa
-      "#ccffff", // Onahau
-    ],
-    alpha: 64,
-    backgroundColour: "#000000",
-    originXFactor: 0.1,
-    originYFactor: 0.75,
-    originScaleFactor: 0.3,
-  },
-  {
-    name: "blue-octo",
+    name: "blue-octo-ani",
     seed: "hello world",
     width: 540,
     height: 540,
@@ -106,6 +26,8 @@ const PARAMS = [
     originYFactor: 0.75,
     originScaleFactor: 0.3,
     layerCount: 2,
+    isolateBranches: true,
+    placements: Rex.SLICE_ENUM.NW | Rex.SLICE_ENUM.NE,
   },
   {
     name: "green-octo",
@@ -133,9 +55,12 @@ const PARAMS = [
     originYFactor: 0.75,
     originScaleFactor: 0.3,
     layerCount: 3,
+    isolateBranches: true,
+    placements: Rex.SLICE_ENUM.NW | Rex.SLICE_ENUM.NE,
   },
   {
     name: "clouds-octo",
+    note: "complex compute... more than 16 iterations is sloooooow.",
     seed: "squiddooo",
     width: 540,
     height: 540,
@@ -159,7 +84,8 @@ const PARAMS = [
     originYFactor: 0.6,
     originScaleFactor: 0.5,
     layerCount: 3,
-    placements: Rex.SLICE_ENUM.SE | Rex.SLICE_ENUM.NE
+    placements: Rex.SLICE_ENUM.SE | Rex.SLICE_ENUM.NE,
+    isolateBranches: false,
   },
   {
     name: "clouds-octo",
@@ -188,7 +114,8 @@ const PARAMS = [
     originYFactor: 0.6,
     originScaleFactor: 0.5,
     layerCount: 2,
-    placements: Rex.SLICE_ENUM.SE | Rex.SLICE_ENUM.NW
+    placements: Rex.SLICE_ENUM.SE | Rex.SLICE_ENUM.NW,
+    isolateBranches: false,
   },
   {
     name: "clouds-octo-bloom",
@@ -210,14 +137,15 @@ const PARAMS = [
       "#0baec9", // Cerulean
       // "#FFFFFF",
     ],
-    alpha: 255,
+    alpha: 92,
     drawStroke: false,
     backgroundColour: "#000000",
     originXFactor: 0.35,
     originYFactor: 0.85,
     originScaleFactor: 0.3,
-    layerCount: 1,
-    placements: Rex.SLICE_ENUM.NW | Rex.SLICE_ENUM.NE
+    layerCount: 0,
+    placements: Rex.SLICE_ENUM.NW | Rex.SLICE_ENUM.NE,
+    isolateBranches: false,
   },
   {
     name: "organic-rex",
@@ -241,7 +169,7 @@ const PARAMS = [
     ],
     alpha: 255,
     backgroundColour: "#000000",
-    drawStroke: false,
+    drawStroke: true,
     originXFactor: 0.1,
     originYFactor: 0.75,
     originScaleFactor: 0.3,
@@ -402,17 +330,27 @@ function keyPressed() {
 function init( r ) {
   r.build( P.widthToHeightRatio ); // redundant on first init but oh well.
 
-  if ( !P.isolateBranches ) { // 
+  if ( !P.isolateBranches ) {
+    // This method will draw all placements at all recursive levels
     let placement = P.placements ? P.placements : Rex.SLICE_ENUM.NW;
     r.addChildren( P.r1, P.r2, placement, P.iterations );
   } else {
+    // This method will ONLY draws branching placements at the first recursive levels, then stick to one.
     ( P.placements & Rex.SLICE_ENUM.NE ) && r.addChildren( P.r1, P.r2, Rex.SLICE_ENUM.NE, P.iterations );
     ( P.placements & Rex.SLICE_ENUM.NW ) && r.addChildren( P.r1, P.r2, Rex.SLICE_ENUM.NW, P.iterations );
     ( P.placements & Rex.SLICE_ENUM.SE ) && r.addChildren( P.r1, P.r2, Rex.SLICE_ENUM.SE, P.iterations );
     ( P.placements & Rex.SLICE_ENUM.SW ) && r.addChildren( P.r1, P.r2, Rex.SLICE_ENUM.SW, P.iterations );
   }
+
 }
 
+/**
+ * 
+ * @param {Number} val 
+ * @param {Number} min 
+ * @param {Number} max 
+ * @returns A Number where (min ≤ n ≤ max).
+ */
 function clamp( val, min, max ) {
   return Math.max(
     Math.min(

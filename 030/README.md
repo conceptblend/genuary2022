@@ -1,34 +1,15 @@
-# p5sketch-template
+# Genuary 2022
 
-p5.js sketch template that includes:
+JAN.30 (credit: Bart Simons) Organic looking output using only rectangular shapes.
 
-- **p5.js** library for core features to edit the HTML canvas
-- **seedrandom** for deterministic randomization
-- **CanvasRecorder** for recording the canvas to webm format
-- **p5.js-svg** for drawing and exporting to SVG
+Inspired by recursive fractal clouds I used to make during class.
 
 -----
 
-### FIX OPEN BUG IN A DEPENDENCY:
+![00-A](./doc/00A--organic-rex-2c653826b22324f7b093d7a19581ff80-2022-01-31T01_37_24.000Z.png)
 
+![00-A](./doc/00B--organic-rex-584ed71b682b4ab5c79cd182092afae9-2022-01-31T01_37_42.455Z.png)
 
-[https://github.com/tapio/live-server/pull/386](https://github.com/tapio/live-server/pull/386)
+![01-B](./doc/01A--organic-rex-bd451ac08abef5a04c1cc63eec07a407-2022-01-31T01_26_09.083Z.png)
 
-```zsh
-cd node_modules/live-server/
-
-yarn remove colors && yarn add colors@1.4.0
-
-# EDIT PACKAGE.JSON DEPENDENCIES
-#
-# "dependencies": {
-#   "chokidar": "^2.0.4",
-#   "colors": "latest", <= change from "latest" to "1.4.0" (stable)
-#   "connect": "^3.6.6",
-
-cd ../../
-
-yarn install && yarn start
-
-# END FIX
-```
+![01-B](./doc/01B--organic-rex-db397fc1e29ed449815d72c788cb4065-2022-01-31T01_34_53.694Z.png)
