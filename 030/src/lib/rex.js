@@ -89,18 +89,19 @@ class Rex {
    * 
    * @param {Boolean} [bStroke] Draw the stroke.
    */
-  draw( bStroke = false ) {
+  draw( cStroke ) {
     fill( this.colour );
-    bStroke && push();
-    bStroke && stroke( 0 );
+    // cStroke && push();
+    cStroke && stroke( cStroke );
+
     beginShape();
     vertex( this.p0.x, this.p0.y );
     vertex( this.p1.x, this.p1.y );
     vertex( this.p2.x, this.p2.y );
     vertex( this.p3.x, this.p3.y );
     endShape( CLOSE );
-    bStroke && pop();
+    // cStroke && pop();
 
-    this.children.forEach( c => c.draw( bStroke ) );
+    this.children.forEach( c => c.draw( cStroke ) );
   }
 }

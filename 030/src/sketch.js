@@ -176,6 +176,41 @@ const PARAMS = [
     layerCount: 2,
     isolateBranches: true,
     placements: Rex.SLICE_ENUM.NW | Rex.SLICE_ENUM.NE,
+  },
+  {
+    name: "organic-rex-alt",
+    seed: "hello world and stuff",
+    width: 540*2,
+    height: 540*2,
+    fps: 8,
+    duration: 300,
+    exportVideo: false,
+    isAnimated: false,
+    renderAsVector: false,
+    r1: 0.6149999999999998,
+    r2: 0.4268277863398974,
+    widthToHeightRatio: 0.86,
+    iterations: 32,
+    colours: [
+      "#654771ff",
+      "#4f4b7eff",
+      "#8a567bff",
+      "#62879aff",
+      "#a0608dff",
+      "#ac3f9fff",
+      "#9a7562ff",
+      "#9a6287ff",
+      "#879a62ff"
+    ],
+    alpha: 255,
+    backgroundColour: "#523333",
+    drawStroke: true,
+    originXFactor: 0.1,
+    originYFactor: 0.75,
+    originScaleFactor: 0.3,
+    layerCount: 2,
+    isolateBranches: true,
+    placements: Rex.SLICE_ENUM.NW | Rex.SLICE_ENUM.NE,
   }
 ];
 
@@ -237,7 +272,7 @@ function setup() {
 
 
 function draw() {
-  background( P.backgroundColour );
+  background( P.backgroundColour ?? 0 );
 
   P.isAnimated && (P.r2 = cos( frameCount ) * 0.15 + 0.35);
 
@@ -246,7 +281,7 @@ function draw() {
     init( l );
   });
 
-  layers.forEach( l => l.draw( P.drawStroke ) );
+  layers.forEach( l => l.draw( P.drawStroke ? color( P.backgroundColour ?? 0 ) : false ) );
 
   if ( EXPORTVIDEO ) {
     if ( P.renderAsVector ) throw new Error("Cannot export video when rendering as Vector");
