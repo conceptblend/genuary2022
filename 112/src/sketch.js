@@ -1,4 +1,4 @@
-
+const DEBUG = !true;
 
 // PARAMETER SETS
 const PARAMS = [
@@ -30,24 +30,35 @@ const PARAMS = [
     maxLength: 143,
     startAngle: 197,
   },
+  {
+    name: "knots 2",
+    seed: "hello world",
+    width: 540,
+    height: 540,
+    fps: 30,
+    duration: 30 * 10, // no unit (frameCount by default; sometimes seconds or frames or whatever)
+    exportVideo: false,
+    isAnimated: true,
+    renderAsVector: !true,
+    bgColour: "#a4c486ff",
+    ribbonColour: "#fff",
+    colours: [
+      "#6cb4b3ff",
+      "#86a4c4ff",
+      "#7181c5ff",
+      "#976abeff",
+      "#c5b571ff",
+      "#c57181ff",
+      "#81c571ff"
+    ],
+    scale: 0.28,
+    minPoints: 3,
+    maxPoints: 14,
+    paintProbability: 0.8,
+    maxLength: 143,
+    startAngle: 197,
+  },
 ];
-
-
-class Arm {
-  constructor( options ) {
-    this.angle = options?.angle ?? 0;
-    this.length = options?.length ?? length;
-    this.rotSpeed = options?.speed ?? 2;
-    this.vect = createVector( this.length * cos( this.angle * Math.PI/180 ), this.length * sin( this.angle * Math.PI/180 ) );
-  }
-  update() {
-    this.vect.rotate( this.rotSpeed * Math.PI/180 );
-  }
-  draw( x, y ) {
-    line( x, y, x+this.vect.x, y+this.vect.y );
-    circle( x, y, 2*this.length );
-  }
-}
 
 // PARAMETERS IN USE
 const P = PARAMS[ PARAMS.length - 1 ];
@@ -59,6 +70,15 @@ const DURATION = P.duration;
 let cnvsrecorder;
 let isRecording = false;
 
+// DRAWING
+let arms;
+let trail = [];
+
+let MAX_LENGTH = P.maxLength;
+
+const CX =  P.width * 0.5;
+const CY =  P.height * 0.5;
+
 function setup() {
   // SVG output is MUCH SLOWER but necessary for the SVG exports
   createCanvas( P.width, P.height, P.renderAsVector ? SVG : P2D );
@@ -66,7 +86,8 @@ function setup() {
   colorMode( RGB, 255 );
   
   noFill();
-  stroke( 255 );
+  stroke( P.ribbonColour ?? 32 );
+  strokeWeight( 2 );
 
   arms = [
     new Arm({
@@ -76,12 +97,12 @@ function setup() {
     }),
     new Arm({
       angle: 0,
-      length: Math.min( P.width, P.height ) * 0.05,
+      length: Math.min( P.width, P.height ) * 0.075,
       speed: -7
     }),
     new Arm({
       angle: 0,
-      length: 37,
+      length: Math.min( P.width, P.height ) * 0.025,
       speed: 6
     }),
     // new Arm({
@@ -98,69 +119,51 @@ function setup() {
   if ( !EXPORTVIDEO && !P.isAnimated ) noLoop();
 }
 
-let arms;
-let trail = [];
-
-const DEBUG = !true;
-let MAX_LENGTH = P.maxLength;
-
-const CX =  P.width * 0.5;
-const CY =  P.height * 0.5;
-
 function draw() {
   background( P.bgColour );
 
-  // DO YOUR DRAWING HERE!
-  let b = createVector(0, 0 );
+  let b = createVector( 0, 0 );
 
-  push();
-  stroke( 192, 0, 0 );
   arms.forEach( a => {
     a.update();
-    DEBUG && a.draw( CX + b.x, CY + b.y );
     b.add( a.vect );
   });
-  pop();
   trail.push( b );
-
+  
   // Trim the trail
   trail = trail.slice( Math.max( trail.length - MAX_LENGTH, 0 ) );
 
-  push();
-  noStroke();
-  fill( P.ribbonColour );
+  if ( !DEBUG ) {
+    push();
+    noStroke();
+    fill( P.ribbonColour );
 
-  drawSegment( trail, P.scale );
+    drawSegment( trail, P.scale );
+    pop();
 
-  if ( trail.length >= P.minPoints ) {
-    let p = 1;
-    while ( p < trail.length ) {
-      let len = P.minPoints + Math.floor( Math.random() * ( P.maxPoints-P.minPoints ) );
-      let pp = Math.min( p+len, trail.length-1 );
-      if ( p !== pp && Math.random() < P.paintProbability ) {
-        let seg = trail.slice( p, pp );
-        fill( P.colours[ Math.floor( Math.random() * P.colours.length )] )
-        drawSegment( seg, P.scale * 0.75 );
+    if ( trail.length >= P.minPoints ) {
+      let p = 1;
+      while ( p < trail.length ) {
+        let len = P.minPoints + Math.floor( Math.random() * ( P.maxPoints-P.minPoints ) );
+        let pp = Math.min( p+len, trail.length-1 );
+        if ( p !== pp && Math.random() < P.paintProbability ) {
+          let seg = trail.slice( p, pp );
+          fill( P.colours[ Math.floor( Math.random() * P.colours.length )] )
+          drawSegment( seg, P.scale * 0.75 );
+        }
+        p += len;
       }
-      p += len;
     }
+  } else {
+    push();
+    stroke( 192, 0, 0 );
+    b.set( 0, 0 );
+    arms.forEach( a => {
+      a.draw( CX + b.x, CY + b.y );
+      b.add( a.vect );
+    });
+    pop();
   }
-
-  pop();
-
-  // beginShape();
-  // trail.forEach( t => vertex( t.x, t.y ));
-  // endShape();
-
-  // stroke( 0, 255, 0 );
-  // beginShape();
-  // trail.forEach( t => vertex( t.x * 1.07, t.y * 0.93 ));
-  // endShape();
-
-  // stroke( 0, 0, 255 );
-  // beginShape();
-  // trail.forEach( t => vertex( t.x * 1.02, t.y * 0.89 ));
-  // endShape();
 
   if ( EXPORTVIDEO ) {
     if ( P.renderAsVector ) throw new Error("Cannot export video when rendering as Vector");
@@ -188,7 +191,7 @@ function drawSegment( pts, scale ) {
     vertex( CX + norm.x, CY + norm.y );
   });
   vertex( CX + norm.x, CY + norm.y );
-  let lairt = [...pts].reverse().forEach( t => {
+  [...pts].reverse().forEach( t => {
     norm = t.copy().mult( 1.0 - scale )
     vertex( CX + norm.x, CY + norm.y );
   });
@@ -202,11 +205,10 @@ function keyPressed() {
   } else if (keyCode === DOWN_ARROW) {
     MAX_LENGTH--;
   // } else if (keyCode === LEFT_ARROW) {
-    
   // } else if (keyCode === RIGHT_ARROW) {
-    
   }
 }
+
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 // %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
