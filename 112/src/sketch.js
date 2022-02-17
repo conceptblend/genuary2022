@@ -182,7 +182,7 @@ const PARAMS = [
     fps: 30,
     duration: 30 * 34, // no unit (frameCount by default; sometimes seconds or frames or whatever)
     exportVideo: !true,
-    isAnimated: true,
+    isAnimated: !false,
     renderAsVector: !true,
     bgColour: "#84786b",
     strokeColour: "#84786b",
@@ -216,6 +216,46 @@ const PARAMS = [
       {
         lengthFactor: 0.115,
         speed: -11
+      },
+    ]
+  },
+  {
+    name: "ribbonz n knots 6 aka spaceknotz",
+    seed: "nom nom nom",
+    width: 540,
+    height: 540,
+    fps: 30,
+    duration: 30 * 34, // no unit (frameCount by default; sometimes seconds or frames or whatever)
+    exportVideo: true,
+    isAnimated: true,
+    renderAsVector: !true,
+    bgColour: "#fff",
+    strokeColour: "#fff",
+    ribbonColour: "#496082",
+    hideRibbon: false,
+    colours: [
+      "#000000  ",
+      "#fff",
+    ],
+    scale: 1.3,
+    innerScale: 1.5,
+    minPoints: 2,
+    maxPoints: 9,
+    paintProbability: 0.75,
+    maxLength: 201,
+    startAngle: -45,
+    armSettings: [
+      {
+        lengthFactor: 0.195,
+        speed: -2
+      },
+      {
+        lengthFactor: 0.095,
+        speed: 3
+      },
+      {
+        lengthFactor: 0.115,
+        speed: -7
       },
     ]
   },
