@@ -229,12 +229,15 @@ const PARAMS = [
     exportVideo: !true,
     isAnimated: true,
     renderAsVector: !true,
-    bgColour: "#fff",
-    strokeColour: "#fff",
+    bgColour: "#a68b7b",
+    strokeColour: "#000",
     ribbonColour: "#496082",
     hideRibbon: false,
     colours: [
-      "#000000",
+      // "#496082",
+      "#7ba68bff",
+      "#5f6194ff",
+      "#a67b95ff",
       "#fff",
     ],
     scale: 1.3,
@@ -246,16 +249,16 @@ const PARAMS = [
     startAngle: -45,
     armSettings: [
       {
-        lengthFactor: 0.195,
-        speed: -2
-      },
-      {
-        lengthFactor: 0.095,
+        lengthFactor: 0.115,
         speed: 3
       },
       {
         lengthFactor: 0.115,
-        speed: -7
+        speed: 3.25
+      },
+      {
+        lengthFactor: 0.115,
+        speed: 3.5
       },
     ]
   },
@@ -345,7 +348,7 @@ function draw() {
   if ( !DEBUG ) {
     if ( !P.hideRibbon ) {
       push();
-      noStroke();
+      // noStroke();
       fill( P.ribbonColour );
 
       drawSegment( trail, P.scale );
