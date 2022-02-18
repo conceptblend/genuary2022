@@ -220,13 +220,13 @@ const PARAMS = [
     ]
   },
   {
-    name: "ribbonz n knots 6 aka spaceknotz",
+    name: "exploration",
     seed: "nom nom nom",
     width: 540,
     height: 540,
     fps: 30,
     duration: 30 * 34, // no unit (frameCount by default; sometimes seconds or frames or whatever)
-    exportVideo: true,
+    exportVideo: !true,
     isAnimated: true,
     renderAsVector: !true,
     bgColour: "#fff",
@@ -234,11 +234,11 @@ const PARAMS = [
     ribbonColour: "#496082",
     hideRibbon: false,
     colours: [
-      "#000000  ",
+      "#000000",
       "#fff",
     ],
     scale: 1.3,
-    innerScale: 1.5,
+    innerScale: 1.25,
     minPoints: 2,
     maxPoints: 9,
     paintProbability: 0.75,
@@ -298,6 +298,8 @@ function setup() {
       speed: a.speed
     })
   );
+
+  loadTrail();
   
   frameRate( FPS );
 
@@ -312,6 +314,18 @@ function randomizeSeed() {
 function init() {
   Math.seedrandom( P.seed );
   segments = calcSegments( P.maxLength );
+}
+
+function loadTrail() {
+  // Pre-load the trail up to the max length
+  for( let n=0, len=P.maxLength; n<len; n++ ) {
+    let b = createVector( 0, 0 );
+    arms.forEach( a => {
+      a.update();
+      b.add( a.vect );
+    });
+    trail.push( b );
+  }
 }
 
 function draw() {
