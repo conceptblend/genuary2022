@@ -1,34 +1,48 @@
-# p5sketch-template
-
-p5.js sketch template that includes:
-
-- **p5.js** library for core features to edit the HTML canvas
-- **seedrandom** for deterministic randomization
-- **CanvasRecorder** for recording the canvas to webm format
-- **p5.js-svg** for drawing and exporting to SVG
-
------
-
-### FIX OPEN BUG IN A DEPENDENCY:
+# Ribbonz
 
 
-[https://github.com/tapio/live-server/pull/386](https://github.com/tapio/live-server/pull/386)
+![snippet of the video](./doc/ribbonz.gif)
+![snippet of the debug video](./doc/debug-ribbonz.gif)
 
-```zsh
-cd node_modules/live-server/
-
-yarn remove colors && yarn add colors@1.4.0
-
-# EDIT PACKAGE.JSON DEPENDENCIES
-#
-# "dependencies": {
-#   "chokidar": "^2.0.4",
-#   "colors": "latest", <= change from "latest" to "1.4.0" (stable)
-#   "connect": "^3.6.6",
-
-cd ../../
-
-yarn install && yarn start
-
-# END FIX
+```json
+{
+  "name": "ribbonz n knots 6",
+  "seed": 1645067622894,
+  "width": 540,
+  "height": 540,
+  "fps": 30,
+  "duration": 1020,
+  "exportVideo": true,
+  "isAnimated": true,
+  "renderAsVector": false,
+  "bgColour": "#fff",
+  "strokeColour": "#fff",
+  "ribbonColour": "#496082",
+  "hideRibbon": false,
+  "colours": [
+    "#000000  ",
+    "#fff"
+  ],
+  "scale": 1.3,
+  "innerScale": 1.5,
+  "minPoints": 2,
+  "maxPoints": 9,
+  "paintProbability": 0.75,
+  "maxLength": 201,
+  "startAngle": -45,
+  "armSettings": [
+    {
+      "lengthFactor": 0.195,
+      "speed": -2
+    },
+    {
+      "lengthFactor": 0.095,
+      "speed": 3
+    },
+    {
+      "lengthFactor": 0.115,
+      "speed": -7
+    }
+  ]
+}
 ```
