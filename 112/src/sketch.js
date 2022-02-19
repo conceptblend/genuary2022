@@ -228,9 +228,9 @@ const PARAMS = [
     duration: 30 * 34, // no unit (frameCount by default; sometimes seconds or frames or whatever)
     exportVideo: !true,
     isAnimated: true,
-    renderAsVector: !true,
-    bgColour: "#a68b7b",
-    strokeColour: "#000",
+    renderAsVector: true,
+    bgColour: "#D9B5A1",
+    strokeColour: "#152845",
     ribbonColour: "#496082",
     hideRibbon: false,
     colours: [
@@ -240,25 +240,25 @@ const PARAMS = [
       "#a67b95ff",
       "#fff",
     ],
-    scale: 1.3,
-    innerScale: 1.25,
+    scale: 1.14,
+    innerScale: 1.085,
     minPoints: 2,
     maxPoints: 9,
     paintProbability: 0.75,
-    maxLength: 201,
-    startAngle: -45,
+    maxLength: 207,
+    startAngle: 37,
     armSettings: [
       {
         lengthFactor: 0.115,
-        speed: 3
+        speed: 1.573
       },
       {
         lengthFactor: 0.115,
-        speed: 3.25
+        speed: -2.01
       },
       {
-        lengthFactor: 0.115,
-        speed: 3.5
+        lengthFactor: 0.315,
+        speed: 3.83
       },
     ]
   },

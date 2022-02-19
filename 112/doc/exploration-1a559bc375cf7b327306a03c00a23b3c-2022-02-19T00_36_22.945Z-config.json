@@ -1,0 +1,38 @@
+{
+  "name": "exploration",
+  "seed": 1645230977574,
+  "width": 540,
+  "height": 540,
+  "fps": 30,
+  "duration": 1020,
+  "exportVideo": false,
+  "isAnimated": true,
+  "renderAsVector": true,
+  "bgColour": "#D9B5A1",
+  "strokeColour": "#152845",
+  "ribbonColour": "#496082",
+  "hideRibbon": false,
+  "colours": [
+    "#7ba68bff",
+    "#5f6194ff",
+    "#a67b95ff",
+    "#fff"
+  ],
+  "scale": 1.3,
+  "innerScale": 1.225,
+  "minPoints": 2,
+  "maxPoints": 9,
+  "paintProbability": 0.75,
+  "maxLength": 401,
+  "startAngle": -45,
+  "armSettings": [
+    {
+      "lengthFactor": 0.115,
+      "speed": 1
+    },
+    {
+      "lengthFactor": 0.315,
+      "speed": -3.15
+    }
+  ]
+}
