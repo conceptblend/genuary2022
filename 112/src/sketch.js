@@ -1,4 +1,4 @@
-const DEBUG = !true;
+let DEBUG = !true;
 
 // PARAMETER SETS
 const PARAMS = [
@@ -262,6 +262,96 @@ const PARAMS = [
       },
     ]
   },
+  {
+    name: "exploration and beyond",
+    seed: "nom nom nom",
+    width: 540,
+    height: 540,
+    fps: 30,
+    duration: 30 * 34, // no unit (frameCount by default; sometimes seconds or frames or whatever)
+    exportVideo: true,
+    isAnimated: true,
+    renderAsVector: !true,
+    bgColour: "#D9B5A1",
+    strokeColour: "#152845",
+    ribbonColour: "#496082",
+    hideRibbon: false,
+    colours: [
+      // "#496082",
+      "#7ba68bff",
+      "#5f6194ff",
+      "#a67b95ff",
+      "#fff",
+    ],
+    scale: 1.4,
+    innerScale: 2.285,
+    minPoints: 3,
+    maxPoints: 9,
+    paintProbability: 0.5,
+    maxLength: 180,
+    startAngle: 90,
+    armSettings: [
+      {
+        lengthFactor: 0.2,
+        speed: 1.5
+      },
+      {
+        lengthFactor: 0.15,
+        speed: -3.18
+      },
+      {
+        lengthFactor: 0.075,
+        speed: 1.1
+      },
+    ]
+  },
+  {
+    name: "spb",
+    seed: "heart",
+    width: 540,
+    height: 540,
+    fps: 30,
+    duration: 30 * 34, // no unit (frameCount by default; sometimes seconds or frames or whatever)
+    exportVideo: !true,
+    isAnimated: true,
+    renderAsVector: true,
+    bgColour: "#D9B5A1",
+    strokeColour: "#152845",
+    ribbonColour: "#ffffff",
+    hideRibbon: !false,
+    colours: [
+      // "#496082",
+      "#7ba68bff",
+      "#5f6194ff",
+      "#a67b95ff",
+      "#fff",
+    ],
+    scale: 1.4,
+    innerScale: 1.25,
+    minPoints: 3,
+    maxPoints: 9,
+    paintProbability: 1.0,
+    maxLength: 724,
+    startAngle: 90,
+    armSettings: [
+      {
+        lengthFactor: 0.15,
+        speed: 0.5
+      },
+      {
+        lengthFactor: 0.11,
+        speed: 2
+      },
+      {
+        lengthFactor: 0.085,
+        speed: 4
+      },
+      // {
+      //   lengthFactor: 0.1,
+      //   speed: 2.5
+      // },
+    ]
+  },
 ];
 
 // PARAMETERS IN USE
@@ -381,6 +471,7 @@ function draw() {
   } else {
     push();
     stroke( 192, 0, 0 );
+    noFill();
     b.set( 0, 0 );
     arms.forEach( a => {
       a.draw( CX + b.x, CY + b.y );
